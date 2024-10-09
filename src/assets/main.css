@@ -30,6 +30,7 @@
 .small-hand {
   display: block;
   position: absolute;
+  transition-duration: 0.99s;
 }
 .big-hand {
   left: 9%;

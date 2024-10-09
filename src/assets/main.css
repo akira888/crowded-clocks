@@ -1,35 +1,42 @@
 @import './base.css';
-
+:root {
+  --color-background: #fff;
+}
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
 }
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.rim,
+.small-hand,
+.big-hand {
+  border: 2px solid #000;
 }
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.rim {
+  width: 100%;
+  border-radius: 50%;
+  position: relative;
 }
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.rim::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.big-hand,
+.small-hand {
+  display: inline-block;
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 5%;
+  transform-origin: left top;
+}
+.big-hand {
+  width: 38%;
+}
+.small-hand {
+  width: 48%;
+  transform: rotate(-90deg);
 }

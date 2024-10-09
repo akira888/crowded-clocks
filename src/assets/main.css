@@ -1,42 +1,58 @@
 @import './base.css';
 :root {
+  --hand-color: #666;
+  --rim-color: #e0e0e0;
   --color-background: #fff;
 }
 #app {
-  max-width: 1280px;
+  max-width: 1130px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
 }
-.rim,
-.small-hand,
-.big-hand {
-  border: 2px solid #000;
+.rim {
+  border: 2px solid var(--rim-color);
 }
+
 .rim {
   width: 100%;
   border-radius: 50%;
   position: relative;
 }
-.rim::before {
+.rim::before,
+.big-hand::before,
+.small-hand::before {
   content: '';
   display: block;
   padding-top: 100%;
 }
 .big-hand,
 .small-hand {
-  display: inline-block;
-  height: 1px;
+  display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 5%;
-  transform-origin: left top;
-}
-.big-hand {
-  width: 38%;
 }
 .small-hand {
-  width: 48%;
-  transform: rotate(-90deg);
+  width: 95%;
+  left: calc(2.5%);
+  top: 2.5%;
+}
+.big-hand::after,
+.small-hand::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background-color: var(--hand-color);
+  width: 50%;
+  position: absolute;
+}
+.big-hand::after {
+  top: calc(50% - 1px);
+}
+.small-hand::after {
+  top: calc(50% - 1px);
+}
+.big-hand {
+  left: 9%;
+  top: 9%;
+  width: 82%;
 }

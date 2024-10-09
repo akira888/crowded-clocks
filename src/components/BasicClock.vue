@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const smallHandDegree = ref('1deg')
+const bigHandDegree = ref('20deg')
+</script>
 
 <template>
   <div class="clocks">
@@ -8,3 +12,12 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.big-hand {
+  transform: rotate(v-bind(bigHandDegree));
+}
+.small-hand {
+  transform: rotate(v-bind(smallHandDegree));
+}
+</style>

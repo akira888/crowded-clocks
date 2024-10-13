@@ -17,17 +17,21 @@ function getTime() {
   times.minutes = date.getMinutes()
   times.seconds = date.getSeconds()
   times.msec = date.getMilliseconds()
-
-  // リセット機構
-  if (times.msec > 20 && times.msec < 980) {
-    clearInterval(reset.value)
-    setTimeout(startClock, 999 - times.msec)
-  }
 }
 
 function startClock() {
   getTime()
-  reset.value = setInterval(getTime, 1000)
+  reset.value = setInterval(runClock, 1000)
+}
+
+function runClock() {
+  getTime()
+
+  // リセット機構
+  if (times.msec > 100 && times.msec < 900) {
+    clearInterval(reset.value)
+    setTimeout(startClock, 999 - times.msec)
+  }
 }
 </script>
 
@@ -35,7 +39,7 @@ function startClock() {
   <h3>digital clock</h3>
   <div>
     <time>{{ times.hours + ':' + times.minutes + ':' + times.seconds }}</time>
-    msec: {{ times.msec }}
+    msec: {{ times.msec }} resetID: {{ reset }}
   </div>
   <div id="grid">
     <BasicClock :times="times" />

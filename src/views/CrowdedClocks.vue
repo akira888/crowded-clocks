@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import BasicClock from '../components/BasicClock.vue'
+import PositionMapper from '@/services/PositionMapper'
+
 const date = new Date()
+const rows = ref<number>(9)
+const columns = ref<number>(20)
+const position = new PositionMapper()
 const reset = ref<number>(0)
 const times: any = reactive({
   hours: date.getHours(),
@@ -9,6 +13,7 @@ const times: any = reactive({
   seconds: date.getSeconds(),
   msec: date.getMilliseconds()
 })
+
 setTimeout(startClock, 999 - times.msec)
 
 function getTime() {
@@ -42,6 +47,15 @@ function runClock() {
     msec: {{ times.msec }} resetID: {{ reset }}
   </div>
   <div id="grid">
-    <BasicClock :times="times" />
+    <div class="items" v-for="n in columns * rows" :key="n">
+      <component :roll="position.findRoll(n)" :times="times" :is="position.findComponent(n)" />
+    </div>
   </div>
 </template>
+
+<style scoped>
+#grid {
+  display: grid;
+  grid-template-columns: repeat(v-bind(columns), 1fr);
+}
+</style>

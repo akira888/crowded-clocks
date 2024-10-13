@@ -18,11 +18,6 @@ const bigHandDegree = computed((): number => {
 </script>
 
 <template>
-  <div class="controll-panel">
-    <input type="range" min="0" max="360" v-model="smallHandDegree" /><b>minutes</b>
-    <br />
-    <input type="range" min="0" max="360" v-model="bigHandDegree" /><b>hour</b>
-  </div>
   <div class="clocks">
     <div class="rim">
       <span class="big-hand"></span>

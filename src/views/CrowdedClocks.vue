@@ -9,7 +9,7 @@ const date = new Date()
 const rows = ref<number>(9)
 const columns = ref<number>(20)
 const position = new PositionDeclare()
-const reset = ref<number>(0)
+const reset = ref(0)
 const times: any = reactive<Times>({
   hours: date.getHours(),
   minutes: date.getMinutes(),

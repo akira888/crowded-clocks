@@ -41,7 +41,7 @@ function getTime() {
 
 function startClock() {
   getTime()
-  reset.value = setInterval(runClock, 1000)
+  reset.value = window.setInterval(runClock, 1000)
 }
 
 function runClock() {
@@ -50,7 +50,7 @@ function runClock() {
   // リセット機構
   if (times.msec > 100 && times.msec < 900) {
     clearInterval(reset.value)
-    setTimeout(startClock, 999 - times.msec)
+    window.setTimeout(startClock, 999 - times.msec)
   }
 }
 </script>

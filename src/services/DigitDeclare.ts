@@ -14,8 +14,11 @@ const hLine: number[] = [r, l]
 const vLine: number[] = [u, d]
 const empty: null[] = [null, null]
 
+interface StringKeyObject {
+  [key: string]: any[]
+}
 export default class {
-  private _positions = {
+  private _positions: StringKeyObject = {
     digit_0: [
       tlCorner,
       hLine,

@@ -14,6 +14,7 @@ export default class {
 
     return partsIndex.includes(cellIdx)
   }
+
   resolveHandPosition(digitPosition: number, digit: string) {
     const declareKey = 'digit_' + digit
     return this.digit.positions[declareKey][digitPosition]

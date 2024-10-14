@@ -1,19 +1,32 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import PositionMapper from '@/services/PositionMapper'
+import { computed, reactive, ref } from 'vue'
+import type { Times } from '@/types/Times'
+import PositionDeclare from '@/services/PositionDeclare'
 import PartsClock from '@/components/PartsClock.vue'
 import OtherClock from '@/components/OtherClock.vue'
 
 const date = new Date()
 const rows = ref<number>(9)
 const columns = ref<number>(20)
-const position = new PositionMapper()
+const position = new PositionDeclare()
 const reset = ref<number>(0)
-const times: any = reactive({
+const times: any = reactive<Times>({
   hours: date.getHours(),
   minutes: date.getMinutes(),
   seconds: date.getSeconds(),
   msec: date.getMilliseconds()
+})
+
+const patterns = ['horizontal', 'vertical']
+const pattern = computed((): string => {
+  if (times.minutes.value == 0) {
+    const idx: number = Math.floor(Math.random() * patterns.length)
+    return patterns[idx]
+  } else if (!pattern.value) {
+    return patterns[0]
+  } else {
+    return pattern.value
+  }
 })
 
 setTimeout(startClock, 999 - times.msec)
@@ -50,7 +63,7 @@ function runClock() {
   </div>
   <div id="grid">
     <div class="items" v-for="n in columns * rows" :key="n">
-      <template v-if="position.isClockParts(n)">
+      <template v-if="position.clockPositions.includes(n)">
         <PartsClock :times="times" :position="n" />
       </template>
       <template v-else>

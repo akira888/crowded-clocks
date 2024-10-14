@@ -1,35 +1,60 @@
 @import './base.css';
-
+:root {
+  --hand-color: #666;
+  --rim-color: #e0e0e0;
+  --color-background: #fff;
+  --color-text: #000;
+}
 #app {
-  max-width: 1280px;
+  max-width: 1030px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
 }
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.rim {
+  border: 2px solid var(--rim-color);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.rim {
+  width: 100%;
+  border-radius: 50%;
+  position: relative;
 }
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.rim::before,
+.big-hand::before,
+.small-hand::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.big-hand,
+.small-hand {
+  display: block;
+  position: absolute;
+  transition-duration: 0.99s;
+}
+.big-hand {
+  left: 9%;
+  top: 9%;
+  width: 82%;
+}
+.small-hand {
+  width: 95%;
+  left: calc(2.5%);
+  top: 2.5%;
+}
+.big-hand::after,
+.small-hand::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background-color: var(--hand-color);
+  width: 50%;
+  position: absolute;
+}
+.big-hand::after {
+  top: calc(50% - 1px);
+}
+.small-hand::after {
+  top: calc(50% - 1px);
 }

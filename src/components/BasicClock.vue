@@ -1,0 +1,45 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+const props = defineProps(['times', 'handsPosition'])
+const defaultDegree: number = 90.0
+const smallHandDegree = computed((): number => {
+  if (props.handsPosition && props.handsPosition[0] !== null) {
+    return props.handsPosition[0] + defaultDegree
+  }
+  const minutes = props.times.minutes
+  const seconds = props.times.seconds
+  let degree = 6 * minutes + 0.1 * seconds
+  return degree + defaultDegree
+})
+const bigHandDegree = computed((): number => {
+  if (props.handsPosition && props.handsPosition[1] !== null) {
+    return props.handsPosition[1] + defaultDegree
+  }
+  const hours = props.times.hours % 12
+  const minutes = props.times.minutes
+  let degree = 30 * hours
+  degree += minutes > 0 ? 0.5 * minutes : 0
+  return degree + defaultDegree
+})
+</script>
+
+<template>
+  <div class="clocks">
+    <div class="rim">
+      <span class="big-hand"></span>
+      <span class="small-hand"></span>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.big-hand {
+  transform: rotate(v-bind(bigHandDegree + 'deg'));
+}
+.small-hand {
+  transform: rotate(v-bind(smallHandDegree + 'deg'));
+}
+b {
+  color: blueviolet;
+}
+</style>

@@ -9,7 +9,7 @@ const date = new Date()
 const rows = ref<number>(9)
 const columns = ref<number>(20)
 const position = new PositionDeclare()
-const reset = ref(0)
+const reset = ref<number>(0)
 const times: any = reactive<Times>({
   hours: date.getHours(),
   minutes: date.getMinutes(),
@@ -41,7 +41,7 @@ function getTime() {
 
 function startClock() {
   getTime()
-  reset.value = setInterval(runClock, 1000)
+  reset.value = window.setInterval(runClock, 1000)
 }
 
 function runClock() {
@@ -50,7 +50,7 @@ function runClock() {
   // リセット機構
   if (times.msec > 100 && times.msec < 900) {
     clearInterval(reset.value)
-    setTimeout(startClock, 999 - times.msec)
+    window.setTimeout(startClock, 999 - times.msec)
   }
 }
 </script>

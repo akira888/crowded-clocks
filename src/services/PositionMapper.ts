@@ -20,4 +20,10 @@ export default class {
 
     return 'default'
   }
+
+  isClockParts(cellIdx: number): boolean {
+    const partsIndex = this.hoursLeft.concat(this.hoursRight, this.minutesLeft, this.minutesRight)
+
+    return partsIndex.includes(cellIdx)
+  }
 }

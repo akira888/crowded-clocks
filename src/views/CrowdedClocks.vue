@@ -50,11 +50,11 @@ function runClock() {
   </div>
   <div id="grid">
     <div class="items" v-for="n in columns * rows" :key="n">
-      <template v-if="position.findRoll(n) == 'default'">
-        <OtherClock :times="times" :position="n" />
+      <template v-if="position.isClockParts(n)">
+        <PartsClock :times="times" :position="n" />
       </template>
       <template v-else>
-        <PartsClock :times="times" :position="n" :roll="position.findRoll(n)" />
+        <OtherClock :times="times" :position="n" />
       </template>
     </div>
   </div>

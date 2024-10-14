@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import PositionMapper from '@/services/PositionMapper'
+import PartsClock from '@/components/PartsClock.vue'
+import OtherClock from '@/components/OtherClock.vue'
 
 const date = new Date()
 const rows = ref<number>(9)
@@ -48,7 +50,12 @@ function runClock() {
   </div>
   <div id="grid">
     <div class="items" v-for="n in columns * rows" :key="n">
-      <component :roll="position.findRoll(n)" :times="times" :is="position.findComponent(n)" />
+      <template v-if="position.findRoll(n) == 'default'">
+        <OtherClock :times="times" :position="n" />
+      </template>
+      <template v-else>
+        <PartsClock :times="times" :position="n" :roll="position.findRoll(n)" />
+      </template>
     </div>
   </div>
 </template>

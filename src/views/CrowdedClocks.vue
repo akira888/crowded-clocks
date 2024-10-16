@@ -5,6 +5,7 @@ import PositionDeclare from '@/services/PositionDeclare'
 import PartsClock from '@/components/PartsClock.vue'
 import OtherClock from '@/components/OtherClock.vue'
 
+const devmode: boolean = !!import.meta.env.VITE_DEVMODE
 const date = new Date()
 const rows = ref<number>(9)
 const columns = ref<number>(20)
@@ -56,8 +57,8 @@ function runClock() {
 </script>
 
 <template>
-  <h3>digital clock</h3>
-  <div>
+  <div v-if="devmode">
+    <h3>digital clock</h3>
     <time>{{ times.hours + ':' + times.minutes + ':' + times.seconds }}</time>
     msec: {{ times.msec }} resetID: {{ reset }}
   </div>

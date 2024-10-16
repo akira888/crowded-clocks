@@ -3,20 +3,36 @@ import { ref, computed } from 'vue'
 
 const props = defineProps(['times', 'handsPosition'])
 const defaultDegree: number = 90.0
+const transformDigitStart: number = 45
 
-const smallHandDegree = computed((): number => {
-  if (props.handsPosition && props.handsPosition[0] !== null) {
-    return props.handsPosition[0] + defaultDegree
+const smallHandDegree = computed((previous) => {
+  if (props.times.seconds <= 5 && previous !== undefined) {
+    return previous
   }
+
+  if (props.handsPosition && props.handsPosition[0] !== null && previous !== undefined) {
+    if (isTransformDigit(props.times.seconds)) {
+      const handsPosition = props.handsPosition[0] + defaultDegree
+      return calclateDegree(previous, handsPosition, 60 - props.times.seconds)
+    }
+  }
+
   const minutes = props.times.minutes
   const seconds = props.times.seconds
   let degree = 6 * minutes + 0.1 * seconds
   return degree + defaultDegree
 })
 
-const bigHandDegree = computed((): number => {
-  if (props.handsPosition && props.handsPosition[1] !== null) {
-    return props.handsPosition[1] + defaultDegree
+const bigHandDegree = computed((previous) => {
+  if (props.times.seconds <= 5 && previous !== undefined) {
+    return previous
+  }
+
+  if (props.handsPosition && props.handsPosition[1] !== null && previous !== undefined) {
+    if (isTransformDigit(props.times.seconds)) {
+      const handsPosition = props.handsPosition[1] + defaultDegree
+      return calclateDegree(previous, handsPosition, 60 - props.times.seconds)
+    }
   }
   const hours = props.times.hours % 12
   const minutes = props.times.minutes
@@ -24,6 +40,17 @@ const bigHandDegree = computed((): number => {
   degree += minutes > 0 ? 0.5 * minutes : 0
   return degree + defaultDegree
 })
+
+function isTransformDigit(seconds: number): boolean {
+  return transformDigitStart <= seconds
+}
+
+function calclateDegree(start: any, end: number, divid: number): number {
+  if (start > end) {
+    end += 360
+  }
+  return start + (end - start) / divid
+}
 </script>
 
 <template>

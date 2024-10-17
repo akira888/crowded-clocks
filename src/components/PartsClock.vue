@@ -24,14 +24,14 @@ const targetNumber = computed((): string => {
   if (String(minutes)[-1] === '9') {
     minutes += 1
   }
-  const housrsStr: string = hours.toString().padStart(2, '0')
+  const hoursStr: string = hours.toString().padStart(2, '0')
   const minutesStr: string = minutes.toString().padStart(2, '0')
 
   switch (roll) {
     case 'hoursLeft':
-      return housrsStr[0]
+      return hoursStr[0]
     case 'hoursRight':
-      return housrsStr[1]
+      return hoursStr[1]
     case 'minutesLeft':
       return minutesStr[0]
     case 'minutesRight':

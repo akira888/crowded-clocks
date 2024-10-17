@@ -18,7 +18,7 @@ const times: any = reactive<Times>({
   msec: date.getMilliseconds()
 })
 
-setTimeout(startClock, 999 - times.msec)
+setTimeout(startClock, 1000 - times.msec)
 
 function getTime() {
   const date = new Date()
@@ -26,6 +26,9 @@ function getTime() {
   times.minutes = date.getMinutes()
   times.seconds = date.getSeconds()
   times.msec = date.getMilliseconds()
+  if (times.msec < 950) {
+    times.seconds += 1
+  }
 }
 
 function startClock() {
@@ -37,9 +40,9 @@ function runClock() {
   getTime()
 
   // リセット機構
-  if (times.msec > 100 && times.msec < 900) {
+  if (times.msec > 50 && times.msec < 950) {
     clearInterval(reset.value)
-    window.setTimeout(startClock, 999 - times.msec)
+    window.setTimeout(startClock, 1000 - times.msec)
   }
 }
 </script>

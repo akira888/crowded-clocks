@@ -15,7 +15,7 @@ const pattern = usePatternStore()
 const roll = new RollResolver().resolveRoll(props.position)
 const positionResolver = new PositionResolver()
 const targetNumber = computed((): string => {
-  let minutes: number = props.times.minutes
+  let minutes: number = props.times.minutes + 1
   let hours: number = props.times.hours
   if (minutes === 59) {
     hours += 1

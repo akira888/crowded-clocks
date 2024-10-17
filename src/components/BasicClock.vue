@@ -6,10 +6,10 @@ const props = defineProps(['times', 'handsPosition'])
 const defaultDegree: number = 90.0
 const transformDigitStart: number = 40
 const transformDigitEnd: number = 59
-const transformedDigit: number = 60
+const transformedDigit: number = transformDigitEnd + 1
 const transformPatternStart: number = 10
 const transformPatternEnd: number = 29
-const transformedPattern: number = 30
+const transformedPattern: number = transformPatternEnd + 1
 const position = new PositionResolver()
 
 const smallHandDegree = computed((previous) => {

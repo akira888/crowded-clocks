@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Times } from '@/types/Times'
-import { computed, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import PositionDeclare from '@/services/PositionDeclare'
 import PartsClock from '@/components/PartsClock.vue'
 import OtherClock from '@/components/OtherClock.vue'

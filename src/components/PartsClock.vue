@@ -17,13 +17,11 @@ const positionResolver = new PositionResolver()
 const targetNumber = computed((): string => {
   let minutes: number = props.times.minutes + 1
   let hours: number = props.times.hours
-  if (minutes === 59) {
+  if (minutes === 60) {
     hours += 1
     minutes = 0
   }
-  if (String(minutes)[-1] === '9') {
-    minutes += 1
-  }
+
   const hoursStr: string = hours.toString().padStart(2, '0')
   const minutesStr: string = minutes.toString().padStart(2, '0')
 
@@ -40,11 +38,15 @@ const targetNumber = computed((): string => {
       return '0'
   }
 })
-const handsPosition = computed(() => {
+const handsPosition = computed((previous) => {
+  if (!previous) {
+    return positionResolver.resolveTimePositions(props.times)
+  }
   if (props.times.seconds >= 30) {
     return positionResolver.resolveHandPosition(
       positionResolver.resolveDigitPosition(roll, props.position),
-      targetNumber.value
+      targetNumber.value,
+      props.times
     )
   } else {
     return positionResolver.resolvePatternPosition(pattern.getPattern, props.position)

@@ -1,6 +1,7 @@
 import PositionDeclare from './PositionDeclare'
 import DigitDeclare from './DigitDeclare'
 import { patternDeclare } from './PatternDeclare'
+import type { Times } from '@/types/Times'
 export default class {
   private position = new PositionDeclare()
   private digit = new DigitDeclare()
@@ -15,9 +16,14 @@ export default class {
     return partsIndex.includes(cellIdx)
   }
 
-  resolveHandPosition(digitPosition: number, digit: string) {
+  resolveHandPosition(digitPosition: number, digit: string, times: Times): number[] {
     const declareKey = 'digit_' + digit
-    return this.digit.positions[declareKey][digitPosition]
+    let _position = this.digit.positions[declareKey][digitPosition]
+    if (_position === null) {
+      _position = this.resolveTimePositions(times)
+    }
+
+    return _position
   }
 
   resolveDigitPosition(roll: string, clockPosition: number): number {
@@ -44,5 +50,24 @@ export default class {
     }
 
     return positions
+  }
+
+  resolveTimePositions(times: Times): number[] {
+    return [this.smallHandDegree(times), this.bigHandDegree(times)]
+  }
+
+  bigHandDegree(times: Times): number {
+    const hours = times.hours % 12
+    const minutes = times.minutes
+    let degree = 30 * hours
+    degree += minutes > 0 ? 0.5 * minutes : 0
+    return degree
+  }
+
+  smallHandDegree(times: Times): number {
+    const minutes = times.minutes
+    const seconds = times.seconds
+    const degree = 6 * minutes + 0.1 * seconds
+    return degree
   }
 }

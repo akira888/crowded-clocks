@@ -4,10 +4,10 @@ import PositionResolver from '@/services/PositionResolver'
 
 const props = defineProps(['times', 'handsPosition'])
 const defaultDegree: number = 90.0
-const transformDigitStart: number = 45
+const transformDigitStart: number = 40
 const transformDigitEnd: number = 59
 const transformedDigit: number = 60
-const transformPatternStart: number = 15
+const transformPatternStart: number = 10
 const transformPatternEnd: number = 29
 const transformedPattern: number = 30
 const position = new PositionResolver()

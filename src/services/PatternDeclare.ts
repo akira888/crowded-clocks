@@ -21,7 +21,7 @@ import {
 interface PatternKeyObject {
   [key: string]: {
     separate: string
-    pattern: [number[]]
+    pattern: Array<number[]>
   }
 }
 export const patternDeclare: PatternKeyObject = {

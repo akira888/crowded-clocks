@@ -59,6 +59,7 @@ export default class {
   bigHandDegree(times: Times): number {
     const hours = times.hours % 12
     const minutes = times.minutes
+    const seconds = times.seconds
     let degree = 30 * hours
     degree += minutes > 0 ? 0.5 * minutes : 0
     return degree

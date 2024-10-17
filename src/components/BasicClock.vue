@@ -9,7 +9,7 @@ const transformPatternStart: number = 15
 const transformPatternEnd: number = 29
 
 const smallHandDegree = computed((previous) => {
-  if (props.handsPosition && props.handsPosition[0] !== null && previous !== undefined) {
+  if (props.handsPosition && previous !== undefined) {
     if (isTransformDigit(props.times.seconds)) {
       const handsPosition = props.handsPosition[0] + defaultDegree
       return calclateDegree(previous, handsPosition, 60 - props.times.seconds)
@@ -29,7 +29,7 @@ const smallHandDegree = computed((previous) => {
 })
 
 const bigHandDegree = computed((previous) => {
-  if (props.handsPosition && props.handsPosition[1] !== null && previous !== undefined) {
+  if (props.handsPosition && previous !== undefined) {
     if (isTransformDigit(props.times.seconds)) {
       const handsPosition = props.handsPosition[1] + defaultDegree
       return calclateDegree(previous, handsPosition, 60 - props.times.seconds)

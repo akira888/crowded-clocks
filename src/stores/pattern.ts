@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 export const usePatternStore = defineStore('pattern', {
   state: () => {
     return {
-      patterns: ['flat', 'vertical', 'wavy', 'diagonal'],
+      patterns: ['flat', 'diagonal', 'vertical', 'diamond'],
       pointer: 0
     }
   },

@@ -3,14 +3,10 @@ import {
   r,
   d,
   l,
-  tlCorner,
-  trCorner,
-  blCorner,
-  brCorner,
-  wu,
-  wd,
-  wl,
-  wr,
+  dl,
+  dr,
+  ul,
+  ur,
   hLine,
   vLine,
   upArrow,
@@ -32,7 +28,21 @@ export const patternDeclare: PatternKeyObject = {
   vertical: {
     separate: 'none',
     pattern: [vLine]
+  },
+  // wavy: {
+  //   separate: 'top/bottom',
+  //   pattern: [downArrow, upArrow]
+  // },
+  diamond: {
+    separate: 'alternately',
+    pattern: [rightArrow, leftArrow]
+  },
+  diagonal: {
+    separate: 'alternately',
+    pattern: [
+      [ur, dl],
+      [ul, dr],
+      [ur, dl]
+    ]
   }
-  // wavy: [downArrow, downArrow, upArrow, upArrow],
-  // diamond: [leftArrow, rightArrow, leftArrow, rightArrow]
 }

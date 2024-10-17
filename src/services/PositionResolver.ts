@@ -48,6 +48,11 @@ export default class {
       positions[0] = format.pattern[0][0]
       positions[1] = format.pattern[0][1]
     }
+    if (format.separate === 'alternately') {
+      const patternKey = clockPosition % format.pattern.length
+      positions[0] = format.pattern[patternKey][0]
+      positions[1] = format.pattern[patternKey][1]
+    }
 
     return positions
   }

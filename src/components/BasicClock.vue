@@ -1,51 +1,43 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import PositionResolver from '@/services/PositionResolver'
 
 const props = defineProps(['times', 'handsPosition'])
 const defaultDegree: number = 90.0
 const transformDigitStart: number = 45
 const transformDigitEnd: number = 59
+const transformedDigit: number = 60
 const transformPatternStart: number = 15
 const transformPatternEnd: number = 29
+const transformedPattern: number = 30
+const position = new PositionResolver()
 
 const smallHandDegree = computed((previous) => {
-  if (props.handsPosition && previous !== undefined) {
-    if (isTransformDigit(props.times.seconds)) {
-      const handsPosition = props.handsPosition[0] + defaultDegree
-      return calclateDegree(previous, handsPosition, 60 - props.times.seconds)
-    } else if (isTransformPattern(props.times.seconds)) {
-      const handsPosition = props.handsPosition[0] + defaultDegree
-      return calclateDegree(previous, handsPosition, 30 - props.times.seconds)
-    }
+  if (previous === undefined) {
+    return position.smallHandDegree(props.times) + defaultDegree
   }
-  if (previous !== undefined) {
-    return previous
-  }
+  const handsPosition = props.handsPosition[0] + defaultDegree
 
-  const minutes = props.times.minutes
-  const seconds = props.times.seconds
-  let degree = 6 * minutes + 0.1 * seconds
-  return degree + defaultDegree
+  if (isTransformDigit(props.times.seconds)) {
+    return calclateDegree(previous, handsPosition, transformedDigit - props.times.seconds)
+  } else if (isTransformPattern(props.times.seconds)) {
+    return calclateDegree(previous, handsPosition, transformedPattern - props.times.seconds)
+  }
+  return previous
 })
 
 const bigHandDegree = computed((previous) => {
-  if (props.handsPosition && previous !== undefined) {
-    if (isTransformDigit(props.times.seconds)) {
-      const handsPosition = props.handsPosition[1] + defaultDegree
-      return calclateDegree(previous, handsPosition, 60 - props.times.seconds)
-    } else if (isTransformPattern(props.times.seconds)) {
-      const handsPosition = props.handsPosition[1] + defaultDegree
-      return calclateDegree(previous, handsPosition, 30 - props.times.seconds)
-    }
+  if (previous === undefined) {
+    return position.bigHandDegree(props.times) + defaultDegree
   }
-  if (previous !== undefined) {
-    return previous
+
+  const handsPosition = props.handsPosition[1] + defaultDegree
+  if (isTransformDigit(props.times.seconds)) {
+    return calclateDegree(previous, handsPosition, transformedDigit - props.times.seconds)
+  } else if (isTransformPattern(props.times.seconds)) {
+    return calclateDegree(previous, handsPosition, transformedPattern - props.times.seconds)
   }
-  const hours = props.times.hours % 12
-  const minutes = props.times.minutes
-  let degree = 30 * hours
-  degree += minutes > 0 ? 0.5 * minutes : 0
-  return degree + defaultDegree
+  return previous
 })
 
 function isTransformDigit(seconds: number): boolean {

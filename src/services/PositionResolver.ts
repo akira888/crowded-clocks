@@ -1,6 +1,6 @@
 import PositionDeclare from './PositionDeclare'
 import DigitDeclare from './DigitDeclare'
-
+import { patternDeclare } from './PatternDeclare'
 export default class {
   private position = new PositionDeclare()
   private digit = new DigitDeclare()
@@ -33,5 +33,16 @@ export default class {
       default:
         return 0
     }
+  }
+
+  resolvePatternPosition(pattern: string, clockPosition: number): number[] | null[] {
+    const format = patternDeclare[pattern]
+    const positions = []
+    if (format.separate === 'none') {
+      positions[0] = format.pattern[0][0]
+      positions[1] = format.pattern[0][1]
+    }
+
+    return positions
   }
 }

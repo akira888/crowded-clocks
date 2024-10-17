@@ -4,12 +4,14 @@ import type { Times } from '@/types/Times'
 import BasicClock from '@/components/BasicClock.vue'
 import RollResolver from '@/services/RollResolver'
 import PositionResolver from '@/services/PositionResolver'
+import { usePatternStore } from '@/stores/pattern'
 
 const props = defineProps<{
   times: Times
   position: number
 }>()
 
+const pattern = usePatternStore()
 const roll = new RollResolver().resolveRoll(props.position)
 const positionResolver = new PositionResolver()
 const targetNumber = computed((): string => {
@@ -38,12 +40,16 @@ const targetNumber = computed((): string => {
       return '0'
   }
 })
-const handsPosition = computed(() =>
-  positionResolver.resolveHandPosition(
-    positionResolver.resolveDigitPosition(roll, props.position),
-    targetNumber.value
-  )
-)
+const handsPosition = computed(() => {
+  if (props.times.seconds >= 30) {
+    return positionResolver.resolveHandPosition(
+      positionResolver.resolveDigitPosition(roll, props.position),
+      targetNumber.value
+    )
+  } else {
+    return positionResolver.resolvePatternPosition(pattern.getPattern, props.position)
+  }
+})
 </script>
 
 <template>

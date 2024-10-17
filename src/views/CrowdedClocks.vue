@@ -18,18 +18,6 @@ const times: any = reactive<Times>({
   msec: date.getMilliseconds()
 })
 
-const patterns = ['horizontal', 'vertical']
-const pattern = computed((): string => {
-  if (times.minutes.value == 0) {
-    const idx: number = Math.floor(Math.random() * patterns.length)
-    return patterns[idx]
-  } else if (!pattern.value) {
-    return patterns[0]
-  } else {
-    return pattern.value
-  }
-})
-
 setTimeout(startClock, 999 - times.msec)
 
 function getTime() {

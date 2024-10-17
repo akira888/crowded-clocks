@@ -4,9 +4,11 @@ import { reactive, ref } from 'vue'
 import PositionDeclare from '@/services/PositionDeclare'
 import PartsClock from '@/components/PartsClock.vue'
 import OtherClock from '@/components/OtherClock.vue'
+import { usePatternStore } from '@/stores/pattern'
 
 const devmode: boolean = !!import.meta.env.VITE_DEVMODE
 const date = new Date()
+const pattern = usePatternStore()
 const rows = ref<number>(9)
 const columns = ref<number>(20)
 const position = new PositionDeclare()
@@ -28,6 +30,9 @@ function getTime() {
   times.msec = date.getMilliseconds()
   if (times.msec < 950) {
     times.seconds += 1
+  }
+  if (times.seconds == 0 || times.seconds > 59) {
+    pattern.setNext()
   }
 }
 

@@ -1,20 +1,15 @@
 # crowded-clocks
 
-This template should help get you started developing with Vue 3 in Vite.
+どこかで見た作品へのオマージュです。30秒ごとに時計たちが忙しなく動き、整列し、時を刻みます。
 
-## Recommended IDE Setup
+## spec
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+VueJS: v3.5.10 and Vite
+Pinia: v2.2.2
 
 ## Project Setup
+
+以下はVueインストール時のままですが、開発に役立つのでそのまま引用します。
 
 ```sh
 npm install

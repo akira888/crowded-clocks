@@ -58,22 +58,22 @@ export default class {
   }
 
   resolveTimePositions(times: Times): number[] {
-    return [this.smallHandDegree(times), this.bigHandDegree(times)]
+    return [this.bigHandDegree(times), this.smallHandDegree(times)]
   }
 
   bigHandDegree(times: Times): number {
+    const minutes = times.minutes
+    const seconds = times.seconds
+    const degree = 6 * minutes + 0.1 * seconds
+    return degree
+  }
+
+  smallHandDegree(times: Times): number {
     const hours = times.hours % 12
     const minutes = times.minutes
     const seconds = times.seconds
     let degree = 30 * hours
     degree += minutes > 0 ? 0.5 * minutes : 0
-    return degree
-  }
-
-  smallHandDegree(times: Times): number {
-    const minutes = times.minutes
-    const seconds = times.seconds
-    const degree = 6 * minutes + 0.1 * seconds
     return degree
   }
 }

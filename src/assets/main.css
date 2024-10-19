@@ -33,12 +33,12 @@
   position: absolute;
   transition-duration: 1.2s;
 }
-.big-hand {
+.small-hand {
   left: 9%;
   top: 9%;
   width: 82%;
 }
-.small-hand {
+.big-hand {
   width: 95%;
   left: calc(2.5%);
   top: 2.5%;

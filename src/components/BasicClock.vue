@@ -16,7 +16,7 @@ const smallHandDegree = computed((previous) => {
   if (previous === undefined) {
     return position.smallHandDegree(props.times) + defaultDegree
   }
-  const handsPosition = props.handsPosition[0] + defaultDegree
+  const handsPosition = props.handsPosition[1] + defaultDegree
 
   if (isTransformDigit(props.times.seconds)) {
     return calclateDegree(previous, handsPosition, transformedDigit - props.times.seconds)
@@ -31,7 +31,7 @@ const bigHandDegree = computed((previous) => {
     return position.bigHandDegree(props.times) + defaultDegree
   }
 
-  const handsPosition = props.handsPosition[1] + defaultDegree
+  const handsPosition = props.handsPosition[0] + defaultDegree
   if (isTransformDigit(props.times.seconds)) {
     return calclateDegree(previous, handsPosition, transformedDigit - props.times.seconds)
   } else if (isTransformPattern(props.times.seconds)) {
